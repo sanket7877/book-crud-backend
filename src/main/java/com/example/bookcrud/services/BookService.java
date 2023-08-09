@@ -22,6 +22,10 @@ public class BookService {
         Book book=new Book();
         if(req.isEdit()){
             book.setBookId(req.getBookId());
+            Optional<Book> optBook = bookRepository.findById(req.getBookId());
+            if(optBook.isPresent()){
+                book=optBook.get();
+            }
         }
         book.setTitle(req.getTitle());
         book.setDescription(req.getDescription());
